@@ -1,6 +1,6 @@
 import random
-from tkinter import *
 import string
+import tkinter as tk
 
 
 def generate_password():
@@ -9,19 +9,21 @@ def generate_password():
         alpha = random.choice(string.ascii_letters)
         symbol = random.choice(string.punctuation)
         numbers = random.choice(string.digits)
-        password.append(alpha)
-        password.append(symbol)
-        password.append(numbers)
+        password.extend([alpha, symbol, numbers])
 
-    y = "".join(str(x) for x in password)
-    lbl.config(text=y)
+    password_str = "".join(password)
+    lbl.config(text=password_str)
 
 
-root = Tk()
-root.title("My Password Generator")
-root.geometry("300x300")
-btn = Button(root, text="Generate Secure Password", command=generate_password)
-btn.grid(row=2, column=2)
-lbl = Label(root, font=("times", 18, "bold"))
-lbl.grid(row=4, column=2)
-root.mainloop()
+if __name__ == '__main__':
+    root = tk.Tk()
+    root.title("My Password Generator")
+    root.geometry("300x300")
+    
+    btn = tk.Button(root, text="Generate Secure Password", command=generate_password)
+    btn.grid(row=2, column=2)
+    
+    lbl = tk.Label(root, font=("times", 18, "bold"))
+    lbl.grid(row=4, column=2)
+    
+    root.mainloop()
